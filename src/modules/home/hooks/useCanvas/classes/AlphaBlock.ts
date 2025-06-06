@@ -55,6 +55,15 @@ class AlphaBlock {
       this.y + this.height / 1.8
     );
   }
+
+  update() {
+    this.draw();
+  }
+
+  moveTo(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
 }
 
 export default AlphaBlock;

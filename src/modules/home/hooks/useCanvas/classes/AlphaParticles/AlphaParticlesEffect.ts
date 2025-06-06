@@ -113,6 +113,14 @@ class AlphaParticlesEffect {
   updateMousePosition(x: number, y: number) {
     this.mouse = { x, y };
   }
+
+  // Experiment
+  moveTo(targetX: number, targetY: number) {
+    this.x = targetX;
+    this.y = targetY;
+
+    // just update x/y and let particles recalculate origin
+  }
 }
 
 export default AlphaParticlesEffect;

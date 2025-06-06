@@ -51,13 +51,15 @@ class Particle {
 
   lastMouseY = 0;
 
+  relativeX = 0;
+
+  relativeY = 0;
+
   constructor({ effect, x, y, color, canvasEl }: CanvasProps<Props>) {
     this.canvasEl = canvasEl;
     this.effect = effect;
 
     this.color = color;
-    this.originX = x;
-    this.originY = y;
     this.x = x;
     this.y = y;
     this.size = effect.gap;
@@ -67,6 +69,11 @@ class Particle {
 
     this.lastMouseX = effect.mouse.x;
     this.lastMouseY = effect.mouse.y;
+
+    this.relativeX = x - effect.x;
+    this.relativeY = y - effect.y;
+    this.originX = this.effect.x + this.relativeX;
+    this.originY = this.effect.y + this.relativeY;
   }
 
   draw() {
@@ -88,11 +95,13 @@ class Particle {
   update() {
     const { x: mouseX, y: mouseY } = this.effect.mouse;
 
-    // determine is it moving right / left
+    // Recalculate origin dynamically
+    this.originX = this.effect.x + this.relativeX;
+    this.originY = this.effect.y + this.relativeY;
+
     const deltaX = mouseX - this.lastMouseX;
     const deltaY = mouseY - this.lastMouseY;
 
-    // Move in same direction as mouse (bounded)
     const moveX = Math.max(
       -this.maxOffsetX,
       Math.min(this.maxOffsetX, deltaX * 0.5)
