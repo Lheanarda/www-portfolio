@@ -18,7 +18,6 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
     const initialX = 10;
     const blockSize = (canvas.width - padding) / 4;
 
-    console.log(blockSize);
     const alphaBlock = new AlphaBlock({
       alphabet: "A",
       canvasEl: { canvas, ctx },

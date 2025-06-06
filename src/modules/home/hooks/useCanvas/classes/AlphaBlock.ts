@@ -34,20 +34,18 @@ class AlphaBlock {
   }
 
   draw() {
-    const { canvas, ctx } = this.canvasEl;
+    const { ctx } = this.canvasEl;
 
     // create rectangle
     ctx.lineWidth = 1;
     ctx.fillStyle = this.backgroundColor;
     ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
 
     // draw text
     const fontSize = this.width;
-    ctx.font = `${fontSize}px Arial`;
+    ctx.font = `${fontSize}px "Playfair Display", serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.lineWidth = 3;
     ctx.fillStyle = "black";
     ctx.fillText(
       this.alphabet,

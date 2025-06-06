@@ -24,49 +24,51 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <style>
+    <!-- Fonts -->
 
-      *, *::before, *::after {
-          box-sizing: border-box;
-        }
-        * {
-          margin: 0;
-        }
-      .loader-container{
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      * {
+        margin: 0;
+      }
+      .loader-container {
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: black;
         height: 100vh;
       }
-     .custom-loader {
-          width: 50px;
-          height: 50px;
-          display: grid;
+      .custom-loader {
+        width: 50px;
+        height: 50px;
+        display: grid;
       }
       .custom-loader::before,
-      .custom-loader::after {    
-          content:"";
-          grid-area: 1/1;
-          --c: radial-gradient(farthest-side,#d17b6c 92%,#0000);
-          background: 
-            var(--c) 50%  0, 
-            var(--c) 50%  100%, 
-            var(--c) 100% 50%, 
-            var(--c) 0    50%;
-          background-size: 12px 12px;
-          background-repeat: no-repeat;
-          animation: s2 1s infinite;
+      .custom-loader::after {
+        content: "";
+        grid-area: 1/1;
+        --c: radial-gradient(farthest-side, #d17b6c 92%, #0000);
+        background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%,
+          var(--c) 0 50%;
+        background-size: 12px 12px;
+        background-repeat: no-repeat;
+        animation: s2 1s infinite;
       }
       .custom-loader::before {
-        margin:4px;
-        filter:hue-rotate(45deg);
+        margin: 4px;
+        filter: hue-rotate(45deg);
         background-size: 8px 8px;
-        animation-timing-function: linear
+        animation-timing-function: linear;
       }
 
-      @keyframes s2{ 
-        100%{transform: rotate(.5turn)}
+      @keyframes s2 {
+        100% {
+          transform: rotate(0.5turn);
+        }
       }
     </style>
     <title>Creative Coding</title>
