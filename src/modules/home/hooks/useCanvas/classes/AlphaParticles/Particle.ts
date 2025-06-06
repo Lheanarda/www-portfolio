@@ -81,7 +81,6 @@ class Particle {
 
     ctx.save();
     ctx.shadowColor = this.color;
-    ctx.shadowBlur = 6;
 
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.size, this.size);
