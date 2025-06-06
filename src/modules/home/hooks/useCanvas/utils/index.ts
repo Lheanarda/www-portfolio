@@ -1,3 +1,4 @@
+import { PALETTE } from "../constants";
 import { Position } from "../typings/canvas";
 
 export const handleRandomRadius = () => {
@@ -61,3 +62,8 @@ export const getCursorPosition = ({
   const y = (cursorY - rect.top) * scaleY; // Adjust for scaling
   return { x, y };
 };
+
+export function getRandomPaletteColor() {
+  const index = Math.floor(Math.random() * PALETTE.length);
+  return PALETTE[index];
+}

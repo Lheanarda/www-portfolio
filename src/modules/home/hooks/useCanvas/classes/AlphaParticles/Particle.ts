@@ -1,4 +1,5 @@
 import { CanvasEl, CanvasProps } from "../../typings/canvas";
+import { getRandomPaletteColor } from "../../utils";
 import AlphaParticleEffect from "./AlphaParticlesEffect";
 
 interface Props {
@@ -43,14 +44,14 @@ class Particle {
   ease = 0;
 
   constructor({ effect, x, y, color, canvasEl }: CanvasProps<Props>) {
-    const { canvas } = canvasEl;
     this.canvasEl = canvasEl;
     this.effect = effect;
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
+
     this.color = color;
     this.originX = x;
     this.originY = y;
+    this.x = x;
+    this.y = y;
     this.size = effect.gap;
     this.dx = 0;
     this.dy = 0;
@@ -67,6 +68,8 @@ class Particle {
     const { ctx } = this.canvasEl;
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.size, this.size);
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(this.x, this.y, this.size, this.size);
   }
 
   update() {

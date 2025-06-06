@@ -33,7 +33,7 @@ class AlphaParticlesEffect {
   mouse = {
     x: 0,
     y: 0,
-    radius: 200,
+    radius: 1000,
   };
 
   constructor(props: CanvasProps<Props>) {
@@ -109,6 +109,10 @@ class AlphaParticlesEffect {
 
   update() {
     this.particles.forEach((p) => p.update());
+  }
+
+  updateMousePosition(x: number, y: number) {
+    this.mouse = { ...this.mouse, x, y };
   }
 }
 

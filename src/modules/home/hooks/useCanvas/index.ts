@@ -19,7 +19,7 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
     const initialX = 10;
     const blockSize = (canvas.width - padding) / 4;
 
-    const alphaParticle = new AlphaParticlesEffect({
+    const alphaParticleA = new AlphaParticlesEffect({
       alphabet: "A",
       canvasEl: { canvas, ctx },
       height: blockSize,
@@ -28,7 +28,7 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
       y: canvas.height / 2 - blockSize / 2,
     });
 
-    const alphaBlock2 = new AlphaBlock({
+    const alphaBlockL = new AlphaBlock({
       alphabet: "L",
       canvasEl: { canvas, ctx },
       height: blockSize,
@@ -37,7 +37,7 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
       y: canvas.height / 2 - blockSize / 2,
     });
 
-    const alphaBlock3 = new AlphaBlock({
+    const alphaBlockE = new AlphaBlock({
       alphabet: "E",
       canvasEl: { canvas, ctx },
       height: blockSize,
@@ -46,7 +46,7 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
       y: canvas.height / 2 - blockSize / 2,
     });
 
-    const alphaBlock4 = new AlphaBlock({
+    const alphaParticleX = new AlphaParticlesEffect({
       alphabet: "X",
       canvasEl: { canvas, ctx },
       height: blockSize,
@@ -55,13 +55,18 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
       y: canvas.height / 2 - blockSize / 2,
     });
 
+    window.addEventListener("mousemove", (e: MouseEvent) => {
+      alphaParticleA.updateMousePosition(e.x, e.y);
+      alphaParticleX.updateMousePosition(e.x, e.y);
+    });
+
     function animate() {
       requestAnimationFrame(animate);
       ctx?.clearRect(0, 0, canvas.width, canvas.height);
-      alphaParticle.update();
-      alphaBlock2.draw();
-      alphaBlock3.draw();
-      alphaBlock4.draw();
+      alphaParticleA.update();
+      alphaBlockL.draw();
+      alphaBlockE.draw();
+      alphaParticleX.update();
     }
 
     animate();
