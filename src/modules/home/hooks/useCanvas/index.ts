@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from "react";
 import AlphaBlock from "./classes/AlphaBlock";
+import AlphaParticlesEffect from "./classes/AlphaParticles/AlphaParticlesEffect";
 
 const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
   useEffect(() => {
@@ -18,7 +19,7 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
     const initialX = 10;
     const blockSize = (canvas.width - padding) / 4;
 
-    const alphaBlock = new AlphaBlock({
+    const alphaParticle = new AlphaParticlesEffect({
       alphabet: "A",
       canvasEl: { canvas, ctx },
       height: blockSize,
@@ -57,7 +58,7 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
     function animate() {
       requestAnimationFrame(animate);
       ctx?.clearRect(0, 0, canvas.width, canvas.height);
-      alphaBlock.draw();
+      alphaParticle.update();
       alphaBlock2.draw();
       alphaBlock3.draw();
       alphaBlock4.draw();

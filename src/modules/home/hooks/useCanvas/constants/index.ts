@@ -1,1 +1,1 @@
-export const FONT_FAMILY = "";
+export const FONT_FAMILY = `"Playfair Display", serif`;

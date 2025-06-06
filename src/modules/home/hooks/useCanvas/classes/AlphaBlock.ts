@@ -1,3 +1,4 @@
+import { FONT_FAMILY } from "../constants";
 import { CanvasEl, CanvasProps } from "../typings/canvas";
 
 interface Props {
@@ -40,10 +41,11 @@ class AlphaBlock {
     ctx.lineWidth = 1;
     ctx.fillStyle = this.backgroundColor;
     ctx.fillRect(this.x, this.y, this.width, this.height);
+    // ctx.strokeRect(this.x, this.y, this.width, this.height);
 
     // draw text
     const fontSize = this.width;
-    ctx.font = `${fontSize}px "Playfair Display", serif`;
+    ctx.font = `${fontSize}px ${FONT_FAMILY}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "black";
