@@ -1,5 +1,4 @@
 import { CanvasEl, CanvasProps } from "../../typings/canvas";
-import { getRandomPaletteColor } from "../../utils";
 import AlphaParticleEffect from "./AlphaParticlesEffect";
 
 interface Props {
@@ -8,6 +7,7 @@ interface Props {
   y: number;
   color: string;
 }
+
 class Particle {
   canvasEl = {} as CanvasEl;
 
@@ -17,11 +17,11 @@ class Particle {
 
   y = 0;
 
-  color = "";
-
   originX = 0;
 
   originY = 0;
+
+  color = "";
 
   size = 0;
 
@@ -33,15 +33,23 @@ class Particle {
 
   vy = 0;
 
-  force = 0;
+  friction = 0;
+
+  ease = 0;
 
   angle = 0;
 
   distance = 0;
 
-  friction = 0;
+  force = 0;
 
-  ease = 0;
+  maxOffsetX = 15;
+
+  maxOffsetY = 15;
+
+  lastMouseX = 0;
+
+  lastMouseY = 0;
 
   constructor({ effect, x, y, color, canvasEl }: CanvasProps<Props>) {
     this.canvasEl = canvasEl;
@@ -53,40 +61,59 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = effect.gap;
-    this.dx = 0;
-    this.dy = 0;
-    this.vx = 0;
-    this.vy = 0;
-    this.force = 0;
-    this.angle = 0;
-    this.distance = 0;
-    this.friction = Math.random() * 0.6 + 0.15;
-    this.ease = Math.random() * 0.1 + 0.005;
+
+    this.friction = Math.random() * 0.5 + 0.15;
+    this.ease = Math.random() * 0.1 + 0.05;
+
+    this.lastMouseX = effect.mouse.x;
+    this.lastMouseY = effect.mouse.y;
   }
 
   draw() {
     const { ctx } = this.canvasEl;
-    ctx.fillStyle = this.color;
+
+    ctx.save();
+    ctx.shadowColor = this.color;
+    ctx.shadowBlur = 6;
+
+    ctx.fillStyle = this.color + "CC";
     ctx.fillRect(this.x, this.y, this.size, this.size);
-    ctx.strokeStyle = "white";
+
+    ctx.strokeStyle = "#ffffff22";
+    ctx.lineWidth = 0.5;
     ctx.strokeRect(this.x, this.y, this.size, this.size);
+    ctx.restore();
   }
 
   update() {
-    this.dx = this.effect.mouse.x - this.x;
-    this.dy = this.effect.mouse.y - this.y;
-    // this.distance = Math.sqrt(Math.pow(this.dx,2) + Math.pow(this.dy,2)) // expensive
-    this.distance = this.dx * this.dx + this.dy * this.dy;
-    this.force = -this.effect.mouse.radius / this.distance;
+    const { x: mouseX, y: mouseY } = this.effect.mouse;
 
-    if (this.distance < this.effect.mouse.radius) {
-      this.angle = Math.atan2(this.dy, this.dx);
-      this.vx += this.force * Math.cos(this.angle);
-      this.vy += this.force * Math.sin(this.angle);
-    }
+    // determine is it moving right / left
+    const deltaX = mouseX - this.lastMouseX;
+    const deltaY = mouseY - this.lastMouseY;
 
-    this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
-    this.y += (this.vx *= this.friction) + (this.originY - this.y) * this.ease;
+    // Move in same direction as mouse (bounded)
+    const moveX = Math.max(
+      -this.maxOffsetX,
+      Math.min(this.maxOffsetX, deltaX * 0.5)
+    );
+    const moveY = Math.max(
+      -this.maxOffsetY,
+      Math.min(this.maxOffsetY, deltaY * 0.5)
+    );
+
+    this.vx += (this.originX + moveX - this.x) * this.ease;
+    this.vy += (this.originY + moveY - this.y) * this.ease;
+
+    this.vx *= this.friction;
+    this.vy *= this.friction;
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    this.lastMouseX = mouseX;
+    this.lastMouseY = mouseY;
+
     this.draw();
   }
 }

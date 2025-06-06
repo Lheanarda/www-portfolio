@@ -2,7 +2,7 @@ import { FONT_FAMILY } from "../../constants";
 import { CanvasEl, CanvasProps } from "../../typings/canvas";
 import Particle from "./Particle";
 
-const GAP = 3;
+const GAP = 4;
 interface Props {
   alphabet: string;
   x: number;
@@ -33,7 +33,6 @@ class AlphaParticlesEffect {
   mouse = {
     x: 0,
     y: 0,
-    radius: 1000,
   };
 
   constructor(props: CanvasProps<Props>) {
@@ -112,7 +111,7 @@ class AlphaParticlesEffect {
   }
 
   updateMousePosition(x: number, y: number) {
-    this.mouse = { ...this.mouse, x, y };
+    this.mouse = { x, y };
   }
 }
 
