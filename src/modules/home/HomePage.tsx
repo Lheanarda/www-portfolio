@@ -9,8 +9,10 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center w-full min-h-screen">
-      {/* <div className="text-yellow-600 text-4xl">Hello World</div> */}
-      <Canvas className="w-full absolute left-0 top-0 -z-10" ref={ref} />
+      <Canvas
+        className=" w-full bg-[#FCFCF5] absolute left-0 top-0 -z-10"
+        ref={ref}
+      />
     </div>
   );
 };
