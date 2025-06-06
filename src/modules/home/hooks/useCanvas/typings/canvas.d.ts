@@ -5,5 +5,8 @@ export interface Position {
 
 export interface CanvasEl {
   canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
+  ctx: CanvasRenderingContext2D;
 }
+export type CanvasProps<T = Record<string, unknown>> = {
+  canvasEl: CanvasEl;
+} & T;
