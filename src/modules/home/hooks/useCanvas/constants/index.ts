@@ -1,2 +1,1 @@
-export const TOTAL_PARTICLES = 300;
-export const MAX_DISTANCE = 80;
+export const FONT_FAMILY = "";
