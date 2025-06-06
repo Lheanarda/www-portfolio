@@ -83,7 +83,7 @@ class Particle {
     ctx.shadowColor = this.color;
     ctx.shadowBlur = 6;
 
-    ctx.fillStyle = this.color + "CC";
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.size, this.size);
 
     ctx.strokeStyle = "#ffffff22";

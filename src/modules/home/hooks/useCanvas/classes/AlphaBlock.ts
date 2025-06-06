@@ -8,6 +8,7 @@ interface Props {
   width: number;
   height: number;
   backgroundColor?: string;
+  color?: string;
 }
 class AlphaBlock {
   alphabet = "";
@@ -24,6 +25,8 @@ class AlphaBlock {
 
   height = 0;
 
+  color = "";
+
   constructor(props: CanvasProps<Props>) {
     this.canvasEl = props.canvasEl;
     this.alphabet = props.alphabet;
@@ -32,6 +35,7 @@ class AlphaBlock {
     this.height = props.height;
     this.x = props.x;
     this.y = props.y;
+    this.color = props.color ?? "black";
   }
 
   draw() {
@@ -48,7 +52,7 @@ class AlphaBlock {
     ctx.font = `${fontSize}px ${FONT_FAMILY}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.fillText(
       this.alphabet,
       this.x + this.width / 2,

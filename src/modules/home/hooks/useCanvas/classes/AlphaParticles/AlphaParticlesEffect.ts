@@ -10,6 +10,7 @@ interface Props {
   width: number;
   height: number;
   backgroundColor?: string;
+  color?: string;
 }
 class AlphaParticlesEffect {
   particles: Particle[] = [];
@@ -35,6 +36,8 @@ class AlphaParticlesEffect {
     y: 0,
   };
 
+  color = "";
+
   constructor(props: CanvasProps<Props>) {
     this.canvasEl = props.canvasEl;
     this.alphabet = props.alphabet;
@@ -43,6 +46,7 @@ class AlphaParticlesEffect {
     this.height = props.height;
     this.x = props.x;
     this.y = props.y;
+    this.color = props.color ?? "black";
     this.draw();
   }
 
@@ -60,7 +64,7 @@ class AlphaParticlesEffect {
     ctx.font = `${fontSize}px ${FONT_FAMILY}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.fillText(
       this.alphabet,
       this.x + this.width / 2,
