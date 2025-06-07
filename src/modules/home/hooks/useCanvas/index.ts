@@ -16,9 +16,13 @@ const useCanvas = (ref: RefObject<HTMLCanvasElement>) => {
     const nameEffect = new NameEffect({ canvasEl: { canvas, ctx } });
 
     window.addEventListener("mousemove", (e: MouseEvent) => {
-      // particle system alphabet
-      nameEffect.alphaA.updateMousePosition(e.x, e.y);
-      nameEffect.alphaX.updateMousePosition(e.x, e.y);
+      const isLeftCursorPressed = e.buttons === 1;
+      nameEffect.alphaA.updateMousePosition(e.x, e.y, isLeftCursorPressed);
+      nameEffect.alphaL.updateMousePosition(e.x, e.y, isLeftCursorPressed);
+      nameEffect.alphaE.updateMousePosition(e.x, e.y, isLeftCursorPressed);
+      nameEffect.alphaX.updateMousePosition(e.x, e.y, isLeftCursorPressed);
+      const shouldChangePointer = nameEffect.alphaL.isCursorPointer();
+      canvas.style.cursor = shouldChangePointer ? "pointer" : "default";
     });
 
     function animate() {

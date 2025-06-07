@@ -1,4 +1,4 @@
-import { CanvasEl, CanvasProps } from "../../typings/canvas";
+import { CanvasEl, CanvasProps } from "../../../typings/canvas";
 import AlphaParticleEffect from "./AlphaParticlesEffect";
 
 interface Props {

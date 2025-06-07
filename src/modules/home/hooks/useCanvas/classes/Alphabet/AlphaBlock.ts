@@ -1,7 +1,7 @@
-import { FONT_FAMILY } from "../constants";
-import { CanvasEl, CanvasProps } from "../typings/canvas";
+import { FONT_FAMILY } from "../../constants";
+import { CanvasEl, CanvasProps } from "../../typings/canvas";
 
-interface Props {
+export interface AlphaBlockProps {
   alphabet: string;
   x: number;
   y: number;
@@ -27,7 +27,13 @@ class AlphaBlock {
 
   color = "";
 
-  constructor(props: CanvasProps<Props>) {
+  mouse = {
+    x: 0,
+    y: 0,
+    pressed: false,
+  };
+
+  constructor(props: CanvasProps<AlphaBlockProps>) {
     this.canvasEl = props.canvasEl;
     this.alphabet = props.alphabet;
     this.backgroundColor = props.backgroundColor ?? "transparent";
@@ -67,6 +73,10 @@ class AlphaBlock {
   moveTo(x: number, y: number) {
     this.x = x;
     this.y = y;
+  }
+
+  updateMousePosition(x: number, y: number, pressed: boolean) {
+    this.mouse = { x, y, pressed };
   }
 }
 

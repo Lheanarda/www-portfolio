@@ -8,12 +8,10 @@ const HomePage: React.FC = () => {
   useCanvas(ref);
 
   return (
-    <div className="flex items-center justify-center w-full min-h-screen">
-      <Canvas
-        className=" w-full bg-[#FCFCF5] absolute left-0 top-0 -z-10"
-        ref={ref}
-      />
-    </div>
+    <Canvas
+      className=" w-full bg-[#FCFCF5] absolute left-0 top-0 -z-10"
+      ref={ref}
+    />
   );
 };
 export default HomePage;

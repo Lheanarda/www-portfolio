@@ -1,6 +1,7 @@
 import { CanvasEl, CanvasProps } from "../typings/canvas";
-import AlphaBlock from "./AlphaBlock";
-import AlphaParticlesEffect from "./AlphaParticles/AlphaParticlesEffect";
+import AlphaBlock from "./Alphabet/AlphaBlock";
+import AlphaL from "./Alphabet/AlphaL";
+import AlphaParticlesEffect from "./Alphabet/AlphaParticles/AlphaParticlesEffect";
 
 const PAGE_PADDING = 20;
 const INITIAL_X = 10;
@@ -11,7 +12,7 @@ class NameEffect {
 
   alphaA = {} as AlphaParticlesEffect;
 
-  alphaL = {} as AlphaBlock;
+  alphaL = {} as AlphaL;
 
   alphaE = {} as AlphaBlock;
 
@@ -31,13 +32,13 @@ class NameEffect {
       y: canvas.height / 2 - blockSize / 2,
     });
 
-    this.alphaL = new AlphaBlock({
-      alphabet: "L",
+    this.alphaL = new AlphaL({
+      x: INITIAL_X + blockSize,
+      y: canvas.height / 2 - blockSize / 2,
       canvasEl: { canvas, ctx },
       height: blockSize,
       width: blockSize,
-      x: INITIAL_X + blockSize,
-      y: canvas.height / 2 - blockSize / 2,
+      alphabet: "L",
     });
 
     this.alphaE = new AlphaBlock({
