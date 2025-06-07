@@ -10,3 +10,9 @@ export interface CanvasEl {
 export type CanvasProps<T = Record<string, unknown>> = {
   canvasEl: CanvasEl;
 } & T;
+
+export interface MouseState {
+  x: number;
+  y: number;
+  pressed: boolean;
+}

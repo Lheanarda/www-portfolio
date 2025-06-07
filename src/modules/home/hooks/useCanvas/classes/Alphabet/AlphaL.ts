@@ -1,42 +1,38 @@
 import { CanvasProps } from "../../typings/canvas";
+import Slider from "../Slider";
 import AlphaBlock, { AlphaBlockProps } from "./AlphaBlock";
 
-interface Thumb {
-  x: number;
-  y: number;
-  radius: number;
-}
 class AlphaL extends AlphaBlock {
-  thumb = {} as Thumb;
+  slider = {} as Slider;
 
   constructor(props: CanvasProps<AlphaBlockProps>) {
     super(props);
-    this.thumb = {
-      x: this.x + this.width / 2.8,
-      y: this.y + this.height / 3.8,
-      radius: this.width / 30,
-    };
-  }
-
-  drawThumb() {
-    const { ctx } = this.canvasEl;
-    ctx.beginPath();
-    ctx.arc(this.thumb.x, this.thumb.y, this.thumb.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = "#fff";
-    ctx.fill();
+    const sliderOriginX = this.x + this.width / 2.8;
+    const sliderOriginY = this.y + this.height / 4.2;
+    const sliderOffsetY = sliderOriginY + this.height / 2;
+    this.slider = new Slider({
+      startX: sliderOriginX,
+      startY: sliderOriginY,
+      maxOffsetX: sliderOriginX,
+      maxOffsetY: sliderOffsetY,
+      thumbRadius: this.width / 30,
+      canvasEl: props.canvasEl,
+      color: "#fff",
+    });
   }
 
   isCursorPointer() {
-    const { x: mouseX, y: mouseY } = this.mouse;
-    const dx = mouseX - this.thumb.x;
-    const dy = mouseY - this.thumb.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    return distance <= this.thumb.radius;
+    return this.slider.isCursorPointer();
   }
 
   update() {
     super.update();
-    this.drawThumb();
+    this.slider.update();
+  }
+
+  updateMousePosition(x: number, y: number, pressed: boolean) {
+    super.updateMousePosition(x, y, pressed);
+    this.slider.updateMousePosition(x, y, pressed);
   }
 }
 
